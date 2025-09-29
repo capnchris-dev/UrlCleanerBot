@@ -13,8 +13,10 @@ sanitize the url for them and configuration to enable automatic message replacem
     "token": "your-token-goes-here"
 }
 ```
+- Run the bot using ```npm run dev```
 
 ## Commands (Todo)
+- [] Clean link/message
 
 ## Todo
 - [x] Scan on message for urls
@@ -23,4 +25,5 @@ sanitize the url for them and configuration to enable automatic message replacem
         - [] v2: offer user option to clean url for them
             - []: bot sanitizes message for user automatically and deletes old message
                 - []: configuration to replace or warn
+
             - []: slash command to send a message with sanitized url
