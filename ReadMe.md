@@ -10,10 +10,12 @@ sanitize the url for them and configuration to enable automatic message replacem
 - Create a config.json in the root of this project with the following:
 ```
 {
-    "token": "your-token-goes-here"
+    "token": "your-token-goes-here",
+    "clientId": "your-application-id-here"
 }
 ```
 - Run the bot using ```npm run dev```
+- Deploy new slash commands with ```npm run deploy-commands```
 
 ## Commands (Todo)
 - [] Clean link/message

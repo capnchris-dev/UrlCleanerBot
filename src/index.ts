@@ -1,9 +1,9 @@
-import { Client, GatewayIntentBits } from "discord.js";
-import fs from "node:fs";
-import path from "node:path";
+import { GatewayIntentBits } from "discord.js";
 import { token } from "../config.json";
+import { CommandClient } from "./model/CommandClient";
+import { registerCommands, registerEvents } from "./util/client-util";
 
-const client = new Client({
+const client = new CommandClient({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
@@ -11,20 +11,7 @@ const client = new Client({
   ],
 });
 
-const eventsPath = path.join(__dirname, "events");
-const eventFiles = fs
-  .readdirSync(eventsPath)
-  .filter((file: string) => file.endsWith(".ts"));
-
-for (const file of eventFiles) {
-  const filePath = path.join(eventsPath, file);
-  const event = require(filePath);
-  if (event.once) {
-    client.once(event.name, (...args: any) => event.execute(...args));
-  } else {
-    client.on(event.name, (...args: any) => event.execute(...args));
-  }
-}
-
+registerEvents(client);
+registerCommands(client);
 
 client.login(token);
