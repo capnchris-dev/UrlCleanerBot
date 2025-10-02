@@ -1,7 +1,8 @@
 import { Events, Interaction, MessageFlags } from "discord.js";
 import { CommandClient } from "../model/CommandClient";
+import { Event } from ".";
 
-module.exports = {
+export default {
   name: Events.InteractionCreate,
   once: false,
   async execute(interaction: Interaction) {
@@ -34,4 +35,4 @@ module.exports = {
       }
     }
   },
-};
+} as Event<Interaction>;

@@ -21,11 +21,14 @@ sanitize the url for them and configuration to enable automatic message replacem
 - [] Clean link/message
 
 ## Todo
+### V1
 - [x] Scan on message for urls
-    - [x] Check if urls have params
-        - [x] If so, check if params are in flagged params list, warn user
-        - [] v2: offer user option to clean url for them
-            - []: bot sanitizes message for user automatically and deletes old message
-                - []: configuration to replace or warn
+- [x] Check if urls have params
+- [x] If so, check if params are in flagged params list, warn user
+- [x] Full ES source code
 
-            - []: slash command to send a message with sanitized url
+### V2
+- [] offer user option to clean url for them
+- []: bot sanitizes message for user automatically and deletes old message
+- []: configuration to replace or warn
+- []: slash command to send a message with sanitized url
