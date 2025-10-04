@@ -1,8 +1,9 @@
 import { Events, Message } from "discord.js";
 import { generateWarnMessage } from "../util/message-util";
+import { Event } from ".";
 
 
-module.exports = {
+export default {
   name: Events.MessageCreate,
   once: false,
   execute(message: Message) {
@@ -11,7 +12,7 @@ module.exports = {
       sendWarnMessage(message, warnMessageContent);
     }
   },
-};
+} as Event<Message>;
 
 function sendWarnMessage(originalMessage: Message, warnMessageContent: any) {
   originalMessage.reply({
