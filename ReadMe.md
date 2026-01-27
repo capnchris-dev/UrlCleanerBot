@@ -8,18 +8,20 @@ sanitize the url for them and configuration to enable automatic message replacem
 
 ## Setup
 ### Environment Variables
-- Create a .env file in the root of this project with the following variables:
-```
-URLCLEANER_TOKEN=your_token_goes_here
-URLCLEANER_CLIENT_ID=your_applicationid_goes_here
-```
+The bot requires the following environment variables to be set:
+
+| Variable             | Description                |
+| -------------------- | -------------------------- |
+| `URLCLEANER_TOKEN`     | Your discord bot token     |
+| `URLCLEANER_CLIENT_ID` | Your discord client id     |
+
 ### Running the bot with Node/NPM
 - Run the bot using ```npm run dev```
 - Deploy new slash commands with ```npm run deploy-commands```
 
 ### Running the bot with Docker
 - This repo contains a Dockerfile you can use to build an image and run a container
-- Remember to reference the .env file so that your environment variables are set
+- Remember to create a .env file in the root of this project so that your environment variables are set
 
 Example:
 `docker run --env-file .env --name your_container_name docker_image_id`
