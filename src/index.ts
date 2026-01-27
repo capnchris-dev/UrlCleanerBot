@@ -1,5 +1,4 @@
 import { GatewayIntentBits } from "discord.js";
-import { token } from "../config.json";
 import { CommandClient } from "./model/CommandClient";
 import { registerCommands, registerEvents } from "./util/client-util";
 
@@ -14,4 +13,4 @@ const client = new CommandClient({
 registerEvents(client);
 registerCommands(client);
 
-client.login(token);
+client.login(process.env.URLCLEANER_TOKEN);

@@ -1,5 +1,4 @@
 import { REST, Routes } from "discord.js";
-import { clientId, token } from "../config.json";
 import { commands } from "./commands";
 
 const parsedCommands = [];
@@ -14,18 +13,28 @@ for (const command of commands) {
   }
 }
 
+// Early return if env var is not set
+if(!process.env.URLCLEANER_TOKEN){
+  throw new Error("Env var 'URLCLEANER_TOKEN' not defined");
+}
+
 // Construct and prepare an instance of the REST module
-const rest = new REST().setToken(token);
+const rest = new REST().setToken(process.env.URLCLEANER_TOKEN);
 
 // and deploy your parsedCommands!
 (async () => {
   try {
+    // Early return if env var is not set
+    if(!process.env.URLCLEANER_CLIENT_ID){
+       throw new Error("Env var 'URLCLEANER_CLIENT_ID' not defined");
+    }
+    
     console.log(
       `Started refreshing ${parsedCommands.length} application (/) commands.`
     );
 
     // The put method is used to fully refresh all commands in the guild with the current set
-    const data: any = await rest.put(Routes.applicationCommands(clientId), {
+    const data: any = await rest.put(Routes.applicationCommands(process.env.URLCLEANER_CLIENT_ID), {
       body: parsedCommands,
     });
 
