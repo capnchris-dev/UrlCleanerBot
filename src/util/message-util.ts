@@ -1,6 +1,6 @@
-import { FLAGGED_PARAMS } from "./flagged-params";
+import { getFlaggedParams } from "./flagged-params";
 
-export function generateWarnMessage(messageContent: string) {
+export function generateWarnMessage(messageContent: string): string {
   if (hasUrl(messageContent)) {
     const flaggedParams = findFlaggedParams(messageContent);
     if (flaggedParams.length > 0) {
@@ -12,7 +12,7 @@ export function generateWarnMessage(messageContent: string) {
   return "";
 }
 
-function hasUrl(messageContent: string) {
+function hasUrl(messageContent: string): boolean {
   return messageContent?.includes("http");
 }
 
@@ -20,10 +20,12 @@ function findFlaggedParams(messageContent: string) {
   const urlFound = findUrl(messageContent);
   const foundFlaggedParams = [];
   if (urlFound) {
+    const domain = urlFound.hostname;
+    const domainFlaggedParams = getFlaggedParams(domain);
     const searchParams = urlFound.searchParams;
 
     for (const [key] of searchParams) {
-      if (FLAGGED_PARAMS.includes(key)) {
+      if (domainFlaggedParams.includes(key)) {
         foundFlaggedParams.push(key);
       }
     }

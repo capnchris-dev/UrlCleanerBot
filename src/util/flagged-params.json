@@ -1,0 +1,14 @@
+[
+    { 
+        "domain": "youtube.com",
+        "params": ["si"]
+    },
+    { 
+        "domain": "spotify.com",
+        "params": ["si"]
+    },
+    { 
+        "domain": "instagram.com",
+        "params": ["igsh"]
+    }
+]

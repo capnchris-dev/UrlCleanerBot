@@ -1,4 +1,4 @@
-import { Events, Interaction } from 'discord.js';
+import { Events } from 'discord.js';
 import interactionCreate from './interaction-create'
 import messageCreate from './message-create'
 import ready from './ready'
