@@ -10,8 +10,8 @@ sanitize the url for them and configuration to enable automatic message replacem
 ### Environment Variables
 The bot requires the following environment variables to be set:
 
-| Variable             | Description                |
-| -------------------- | -------------------------- |
+| Variable               | Description                |
+| ---------------------- | -------------------------- |
 | `URLCLEANER_TOKEN`     | Your discord bot token     |
 | `URLCLEANER_CLIENT_ID` | Your discord client id     |
 
@@ -26,18 +26,18 @@ The bot requires the following environment variables to be set:
 Example:
 `docker run --env-file .env --name your_container_name docker_image_id`
 
-## Commands (Todo)
-- [] Clean link/message
+## Pre-Configured Flagged Params File
+This bot comes equipped with its own starting flagged-params by domain in `src/util/flagged-params.json`. Although commands are coming soon to modify this list from the bot directly, feel free to modify this file in the following format to customize:
 
-## Todo
-### V1
-- [x] Scan on message for urls
-- [x] Check if urls have params
-- [x] If so, check if params are in flagged params list, warn user
-- [x] Full ES source code
-
-### V2
-- [] offer user option to clean url for them
-- []: bot sanitizes message for user automatically and deletes old message
-- []: configuration to replace or warn
-- []: slash command to send a message with sanitized url
+```json
+[
+    {
+        "domain": "test.com",
+        "params": ["si"]
+    },
+    {
+        "domain": "test2.com",
+        "params": ["si"]
+    }
+]
+```

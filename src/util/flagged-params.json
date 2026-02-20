@@ -1,0 +1,26 @@
+[
+    { 
+        "domain": "youtube.com",
+        "params": ["si"]
+    },
+    { 
+        "domain": "spotify.com",
+        "params": ["si"]
+    },
+    { 
+        "domain": "instagram.com",
+        "params": ["igsh"]
+    },
+    { 
+        "domain": "x.com",
+        "params": ["t"]
+    },
+    { 
+        "domain": "fixupx.com",
+        "params": ["t"]
+    },
+    { 
+        "domain": "vxtwitter.com",
+        "params": ["t"]
+    }
+]
