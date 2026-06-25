@@ -8,6 +8,8 @@ RUN npm install
 
 RUN npm run build
 
-RUN rm -rf /src
+RUN cp ./src/util/flagged-params.json ./dist
+
+RUN rm -rf ./src
 
 CMD ["npm", "run", "start"]

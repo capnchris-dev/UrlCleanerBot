@@ -8,7 +8,7 @@ export type DomainFlaggedParam = {
 
 type FlaggedParamsMap = Map<string, Set<string>>;
 
-const FLAGGED_PARAMS_FILE = path.resolve(__dirname, 'flagged-params.json');
+const FLAGGED_PARAMS_FILE = path.resolve(import.meta.dirname, 'flagged-params.json');
 
 let params = loadFromFile();
 
