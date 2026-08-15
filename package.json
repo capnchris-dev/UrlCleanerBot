@@ -17,6 +17,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
+    "@semantic-release/npm": "^13.1.5",
     "@types/node": "^24.5.2",
     "husky": "^9.1.7",
     "tsdown": "^0.15.6",
@@ -30,6 +31,12 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
       "@semantic-release/github"
     ]
   },
