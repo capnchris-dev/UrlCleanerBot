@@ -2,6 +2,7 @@
   "name": "discord-url-cleaner-bot",
   "version": "0.0.6",
   "description": "",
+  "private": true,
   "main": "dist/index.mjs",
   "scripts": {
     "dev": "tsx watch src/index.ts",
