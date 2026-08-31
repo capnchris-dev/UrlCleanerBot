@@ -1,13 +1,13 @@
-import { Message } from "discord.js";
+import { Message, TextChannel } from "discord.js";
 import { getFlaggedParams } from "./flagged-params";
 
 export function generateWarnMessage(messageContent: string): string {
-    const flaggedParams = findFlaggedParams(messageContent);
-    if (flaggedParams.length > 0) {
-      return `This message contains a url with the flagged param(s):${flaggedParams.map(
-        (param) => " " + param
-      )}`;
-    }
+  const flaggedParams = findFlaggedParams(messageContent);
+  if (flaggedParams.length > 0) {
+    return `This message contains a url with the flagged param(s):${flaggedParams.map(
+      (param) => " " + param
+    )}`;
+  }
   return "";
 }
 
@@ -20,25 +20,30 @@ export function sanitizeMessage(originalMessage: Message): void {
     if (isUrl(word)) {
       const url = new URL(word);
       parsedWord = sanitizeUrl(url);
-      isSanitizedMessage = true;
+      if (parsedWord != word) {
+        isSanitizedMessage = true;
+      }
     }
     newMessage += " " + parsedWord
-
-    if(isSanitizedMessage){
-      overrideMessage(originalMessage, newMessage);
-    }
   });
-  
+
+  if (isSanitizedMessage) {
+    overrideMessage(originalMessage, newMessage);
+  }
+
 }
 
 function overrideMessage(originalMessage: Message, newMessage: string): void {
-  console.log(`Sanitized message: ${newMessage}`);
-  originalMessage.client.channels.cache.get(originalMessage.channelId).send(newMessage);
-  console.log(`Original message: ${originalMessage.content}`);
-    if(originalMessage.deletable){
-      console.log(`Deleting original message: ${originalMessage.content}`);
-      originalMessage.delete()
-    }
+  (originalMessage.channel as TextChannel).send(`${originalMessage.author} said: \n > ${newMessage}\n\n *(The original message contained a url with blocked trackers.)*`)
+    .then(() => {
+      if (originalMessage.deletable) {
+        originalMessage.delete()
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+    }).finally(() => {
+    });
 }
 
 
@@ -52,7 +57,6 @@ function isUrl(word: string): boolean {
 }
 
 function sanitizeUrl(url: URL): string {
-  // remove the flagged params from the url and return the sanitized url
   const domain = url.hostname;
   const domainFlaggedParams = getFlaggedParams(domain);
   const searchParams = url.searchParams;
@@ -87,6 +91,6 @@ function findUrl(messageContent: string): URL | undefined {
     try {
       const potentialUrl = new URL(word);
       return potentialUrl;
-    } catch (e) {}
+    } catch (e) { }
   }
 }

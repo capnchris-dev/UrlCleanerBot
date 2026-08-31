@@ -7,6 +7,8 @@ export default {
   name: Events.MessageCreate,
   once: false,
   execute(message: Message) {
-    sanitizeMessage(message)
+    if (message.author.id != process.env.URLCLEANER_CLIENT_ID) {
+      sanitizeMessage(message)
+    }
   },
 } as Event<Message>;
