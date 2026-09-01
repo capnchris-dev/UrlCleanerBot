@@ -1,5 +1,5 @@
 import { Events, Message } from "discord.js";
-import { generateWarnMessage } from "../util/message-util";
+import { sanitizeMessage } from "../util/message-util";
 import { Event } from ".";
 
 
@@ -7,15 +7,8 @@ export default {
   name: Events.MessageCreate,
   once: false,
   execute(message: Message) {
-    const warnMessageContent = generateWarnMessage(message.content);
-    if (warnMessageContent) {
-      sendWarnMessage(message, warnMessageContent);
+    if (message.author.id != process.env.URLCLEANER_CLIENT_ID) {
+      sanitizeMessage(message);
     }
   },
 } as Event<Message>;
-
-function sendWarnMessage(originalMessage: Message, warnMessageContent: any) {
-  originalMessage.reply({
-    content: warnMessageContent,
-  });
-}
