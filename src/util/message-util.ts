@@ -57,30 +57,3 @@ function sanitizeUrl(url: URL): string {
   }
   return url.toString();
 }
-
-function findFlaggedParams(messageContent: string): string[] {
-  const urlFound = findUrl(messageContent);
-  const foundFlaggedParams = [];
-  if (urlFound) {
-    const domain = urlFound.hostname;
-    const domainFlaggedParams = getFlaggedParams(domain);
-    const searchParams = urlFound.searchParams;
-
-    for (const [key] of searchParams) {
-      if (domainFlaggedParams.includes(key)) {
-        foundFlaggedParams.push(key);
-      }
-    }
-  }
-  return foundFlaggedParams;
-}
-
-function findUrl(messageContent: string): URL | undefined {
-  const words = messageContent.split(" ");
-  for (const word of words) {
-    try {
-      const potentialUrl = new URL(word);
-      return potentialUrl;
-    } catch (e) { }
-  }
-}
