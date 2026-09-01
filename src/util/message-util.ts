@@ -1,16 +1,6 @@
 import { Message, TextChannel } from "discord.js";
 import { getFlaggedParams } from "./flagged-params";
 
-export function generateWarnMessage(messageContent: string): string {
-  const flaggedParams = findFlaggedParams(messageContent);
-  if (flaggedParams.length > 0) {
-    return `This message contains a url with the flagged param(s):${flaggedParams.map(
-      (param) => " " + param
-    )}`;
-  }
-  return "";
-}
-
 export function sanitizeMessage(originalMessage: Message): void {
   let newMessage = ""
   let isSanitizedMessage = false;
