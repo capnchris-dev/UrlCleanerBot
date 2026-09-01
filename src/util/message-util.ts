@@ -2,11 +2,11 @@ import { Message, TextChannel } from "discord.js";
 import { getFlaggedParams } from "./flagged-params";
 
 export function sanitizeMessage(originalMessage: Message): void {
-  let newMessage = ""
+  let newMessage = "";
   let isSanitizedMessage = false;
   const words: string[] = originalMessage.content.split(" ");
   words.forEach(word => {
-    let parsedWord = word
+    let parsedWord = word;
     if (isUrl(word)) {
       const url = new URL(word);
       parsedWord = sanitizeUrl(url);
@@ -14,7 +14,7 @@ export function sanitizeMessage(originalMessage: Message): void {
         isSanitizedMessage = true;
       }
     }
-    newMessage += " " + parsedWord
+    newMessage += " " + parsedWord;
   });
 
   if (isSanitizedMessage) {
@@ -27,11 +27,11 @@ function overrideMessage(originalMessage: Message, newMessage: string): void {
   (originalMessage.channel as TextChannel).send(`${originalMessage.author} said: \n > ${newMessage}\n\n *(The original message contained a url with blocked trackers.)*`)
     .then(() => {
       if (originalMessage.deletable) {
-        originalMessage.delete()
+        originalMessage.delete();
       }
     })
     .catch((e) => {
-      console.log(e)
+      console.log(e);
     }).finally(() => {
     });
 }

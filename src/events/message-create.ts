@@ -8,7 +8,7 @@ export default {
   once: false,
   execute(message: Message) {
     if (message.author.id != process.env.URLCLEANER_CLIENT_ID) {
-      sanitizeMessage(message)
+      sanitizeMessage(message);
     }
   },
 } as Event<Message>;
