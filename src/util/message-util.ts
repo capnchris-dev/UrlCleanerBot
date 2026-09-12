@@ -10,7 +10,7 @@ export function sanitizeMessage(originalMessage: Message): void {
     if (isUrl(word)) {
       const url = new URL(word);
       parsedWord = sanitizeUrl(url);
-      if (parsedWord != word) {
+      if (parsedWord != word.toLowerCase()) {
         isSanitizedMessage = true;
       }
     }
